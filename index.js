@@ -22,16 +22,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/createuser', (req, res) => {
+  // NOTE it is okay to omit fields, they will simply not be properties in doc
   db.User.create({
     name: 'Star Wars Character',
     image: 'http://www.facetheforce.today/random/400?r=1',
     birthyear: Math.floor(Math.random() * 80) + 1950,
     admin: Math.random() < 0.5 ? true : false
   })
-    .then(result => {
+    .then(() => {
       res.send('success');
     }).catch(err => {
-      console.log(err)
+      console.log(err);
       res.send('errzors, check log');
     });
 });
